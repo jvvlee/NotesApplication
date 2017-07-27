@@ -1,4 +1,4 @@
-class NotesController < ApplicationController
+class Api::NotesController < Api::BaseController
   def index
   end
 
