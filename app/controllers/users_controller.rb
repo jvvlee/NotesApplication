@@ -1,7 +1,9 @@
 class UsersController < ApplicationController
   def create
-    if @user.valid?
-      
+    @user = @user.new(user_params)
+
+    if @user.save
+      login(@user)
       redirect_to notes_path
     else
       render 'new'

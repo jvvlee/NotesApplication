@@ -1,12 +1,12 @@
 class SessionsController < ApplicationController
   def new
-  	@session = Session.new
   end
 
   def create
     user = User.find_by(username: session_params[:username])
 
-    if user && user.login(session_params[:password])
+    if user && user.authenticate(session_params[:password])
+      login(user)
       redirect_to notes_path && return
     else
       render 'new'
