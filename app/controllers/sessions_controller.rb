@@ -1,5 +1,7 @@
 class SessionsController < ApplicationController
+
   def new
+    redirect_to home_path if current_user
   end
 
   def create
@@ -7,14 +9,14 @@ class SessionsController < ApplicationController
 
     if user && user.authenticate(session_params[:password])
       login(user)
-      redirect_to notes_path && return
+      redirect_to home_path && return
     else
       render 'new'
     end
   end
 
   def destroy
-    log_out
+    logout
     redirect_to root_url
   end
 
