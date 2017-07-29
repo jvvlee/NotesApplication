@@ -12,5 +12,6 @@ Rails.application.routes.draw do
 
   namespace :api do 
   	resources :notes
+  	resources :notes_users, path: 'permissions'
   end
 end
