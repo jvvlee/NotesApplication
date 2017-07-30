@@ -1,25 +1,24 @@
 class Api::NotesUsersController < Api::BaseController
   def create
-    @note = Note.new()
+    @permission = NotesUsers.new(notes_users_params)
 
-    respond_with @note
+    respond_with :api, @permission
   end
 
   def update
-    #probably to change permission level
+    @permission = NotesUsers.find(params[:id]).update_attributes(notes_users_params)
+    respond_with :api @permission
   end
 
   def destroy
-    note = Note.find(params[:id])
+    @permission = NotesUsers.find(params[:id])
 
-    if note.destroy
-      respond_with params[:id]
-    else
-      respond_with {error: true}
+    if @permission.destroy!
+      respond_with :api, @permission
     end
   end
 
   def notes_users_params
-    params.require(:permission).permit(:note_id, :user_id, :level)
+    params.require(:permission).permit(:email, :level)
   end
 end

@@ -9,7 +9,7 @@ var Note = React.createClass({
       var content = this.refs.content.value
       var id = this.props.note.id
       var note = {id: id, content: content, title: title};
-      this.props.noteEdited(note);
+      this.props.noteEdited(note, this.props.type);
     }
 
     this.setState({editable: !this.state.editable})

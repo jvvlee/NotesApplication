@@ -7,8 +7,8 @@ class Note < ApplicationRecord
   has_many :read_permissions, -> {where level: 1}, class_name: "NotesUsers"
   has_many :write_permissions, -> {where level: 2}, class_name: "NotesUsers"
 
-  has_many :readable_notes, through: :read_permissions, source: :user
-  has_many :writable_notes, through: :write_permissions, source: :user
+  has_many :readable_users, through: :read_permissions, source: :user
+  has_many :writable_users, through: :write_permissions, source: :user
 
   has_many :users, through: :permissions
 
@@ -18,5 +18,7 @@ class Note < ApplicationRecord
   	permissions.create({user_id: user.id, level: level})
   end
 
-  
+  def can_write?(user)
+    !!write_permissions.find_by_user_id(user.id)
+  end
 end

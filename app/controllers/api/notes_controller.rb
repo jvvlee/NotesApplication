@@ -1,9 +1,6 @@
 class Api::NotesController < Api::BaseController
   def index
-    respond_with Note.all
-
-    # @notes = current_user.notes
-    # @shared_notes = current_user.shared_notes
+    respond_with({:notes => current_user.notes, :writable => current_user.writable_notes, :readable => current_user.readable_notes})
   end
 
   def create
@@ -20,7 +17,7 @@ class Api::NotesController < Api::BaseController
     @note = Note.find(params[:id])
 
     if @note.destroy!
-      respond_with @note
+      respond_with :api, @note
     end
   end
 
