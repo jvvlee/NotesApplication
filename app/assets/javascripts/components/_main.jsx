@@ -5,6 +5,8 @@ var Main = React.createClass({
     }
   },
 
+  // Model manipulation
+
   noteDeleted(id) {
     _this = this
 
@@ -17,27 +19,44 @@ var Main = React.createClass({
     });
   },
 
+  noteEdited(note) {
+
+    $.ajax({ 
+      url: `/api/notes/${note.id}`, 
+      type: 'PUT', 
+      data: { note: note }, 
+      success: () => {
+        this.updateNote(note)
+      }
+    })
+
+  },
+
+  // View logic
+
   removeNote(id) {
      var filteredNotes = this.state.notes.filter((note) => { return note.id != id; }); 
      this.setState({ notes: filteredNotes });
   },
-
-  noteEdited(id) {
-    
-  },
-
 
   receiveNote(newNote) {
     var allNotes = this.state.notes.concat(newNote)
     this.setState({notes: allNotes })
   },
 
-  componentDidMount() { 
-    var that = this
+  updateNote(editedNote) {
+    var notes = this.state.notes.filter((n) => { 
+      return n.id != editedNote.id 
+    });
 
-    $.getJSON('/api/notes.json', function (response) { 
-      that.setState({ notes: response });
-    }.bind(that));
+    notes.push(editedNote); 
+    this.setState({notes: notes });
+  },
+
+  componentDidMount() { 
+    $.getJSON('/api/notes.json', (response) => { 
+      this.setState({ notes: response });
+    });
   }, 
 
   render() { 

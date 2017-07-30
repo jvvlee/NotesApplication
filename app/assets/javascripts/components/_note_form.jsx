@@ -13,7 +13,6 @@ var NewNote = React.createClass({
 	 				content: content
 	 			}
 	 		},
-
 	 		success: (response) => {
 	 			this.props.receiveNote(response);
 	 		}

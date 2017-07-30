@@ -12,7 +12,7 @@ class Api::NotesController < Api::BaseController
   end
 
   def update
-    @note.find(params[:note][:id])
+    @note = Note.find(params[:id]).update_attributes(note_params)
     respond_with :api, @note
   end
 

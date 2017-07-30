@@ -5,9 +5,11 @@ var Note = React.createClass({
 
   editNote() {
     if (this.state.editable) {
-      var title = this.refs.name.value
+      var title = this.refs.title.value
       var content = this.refs.content.value
-      console.log('in editNote', this.state.editable, title, content);
+      var id = this.props.note.id
+      var note = {id: id, content: content, title: title};
+      this.props.noteEdited(note);
     }
 
     this.setState({editable: !this.state.editable})
@@ -23,7 +25,7 @@ var Note = React.createClass({
         {content}
         
         <button onClick={this.editNote}>{this.state.editable ? 'Submit' : 'Edit' }</button>
-        <button onClick={this.props.noteDeleted.bind(this, this.props.note.id)}>DELETE</button>          
+        <button onClick={this.props.noteDeleted.bind(null, this.props.note.id)}>DELETE</button>          
       </div>
     ) 
   },
