@@ -7,13 +7,13 @@ class Api::NotesController < Api::BaseController
   end
 
   def create
-    @note = Note.new()
-
-    respond_with @note
+    @note = current_user.notes.create(note_params)
+    respond_with :api, @note
   end
 
   def update
-    respond_with @note
+    @note.find(params[:note][:id])
+    respond_with :api, @note
   end
 
   def destroy
@@ -27,13 +27,6 @@ class Api::NotesController < Api::BaseController
   end
 
   def note_params
-    params.require(:note).permit(:content, :user_id)
+    params.require(:note).permit(:content, :title)
   end
-
-  # TODO: A reminder!
-  #   respond_to do |format|
-  #     format.html {render html}
-  #     format.json {render json}
-  #   end
-  # end
 end
