@@ -17,12 +17,10 @@ class Api::NotesController < Api::BaseController
   end
 
   def destroy
-    note = Note.find(params[:id])
+    @note = Note.find(params[:id])
 
-    if note.destroy
-      respond_with params[:id]
-    else
-      render :json => {error: "true"}
+    if @note.destroy!
+      respond_with @note
     end
   end
 

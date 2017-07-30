@@ -1,10 +1,16 @@
 var AllNotes = React.createClass({
-  render() { 
+  deleteNote(id) {
+    this.props.noteDeleted(id)
+  },
 
-    var notes = this.props.notes.map(function (note) {
+  render() { 
+    var notes = this.props.notes.map((note) => {
+
       return (
         <div className="note" key={note.id}>
+          <h3>{note.title}</h3>
           <p>{note.content}</p>
+          <button onClick={this.deleteNote.bind(this, note.id)}>DELETE</button>          
         </div>
       )
     })

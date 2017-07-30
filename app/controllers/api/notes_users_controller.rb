@@ -22,11 +22,4 @@ class Api::NotesUsersController < Api::BaseController
   def notes_users_params
     params.require(:permission).permit(:note_id, :user_id, :level)
   end
-
-  # TODO: A reminder!
-  #   respond_to do |format|
-  #     format.html {render html}
-  #     format.json {render json}
-  #   end
-  # end
 end
