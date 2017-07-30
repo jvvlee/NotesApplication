@@ -12,7 +12,6 @@ var Main = React.createClass({
       url: `/api/notes/${id}`, 
       type: 'DELETE', 
       success() { 
-        debugger
         _this.removeNote(id)
       } 
     });
@@ -22,6 +21,11 @@ var Main = React.createClass({
      var filteredNotes = this.state.notes.filter((note) => { return note.id != id; }); 
      this.setState({ notes: filteredNotes });
   },
+
+  noteEdited(id) {
+    
+  },
+
 
   receiveNote(newNote) {
     var allNotes = this.state.notes.concat(newNote)
@@ -41,7 +45,7 @@ var Main = React.createClass({
       <div> 
         <h1 className="col-lg-12 bg-primary">Hello, World!</h1>
         <NewNote receiveNote={this.receiveNote} />
-        <AllNotes notes={this.state.notes} noteDeleted={this.noteDeleted} />
+        <AllNotes notes={this.state.notes} noteDeleted={this.noteDeleted} noteEdited={this.noteEdited} />
       </div> 
   )} 
 });
