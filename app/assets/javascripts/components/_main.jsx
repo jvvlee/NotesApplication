@@ -3,12 +3,14 @@ var Main = React.createClass({
     return {
       notes: [],
       writableNotes: [],
-      readableNotes: []
+      readableNotes: [],
+      permissions: []
     }
   },
 
   // Model manipulation
 
+  // Notes
   componentDidMount() { 
     $.getJSON('/api/notes.json', (response) => {
       this.setState({ 
@@ -17,6 +19,12 @@ var Main = React.createClass({
         readableNotes: response.readable
       });
     });
+
+    $.getJSON('/api/permissions.json', (response) => {
+      this.setState({
+        permissions: response
+      })
+    })
 
   }, 
 
@@ -43,21 +51,25 @@ var Main = React.createClass({
     })
   },
 
+  // Permissions
+
+  permissionEdited() {
+
+  },
+
+  permissionDeleted() {
+
+  },
+
   // View logic
 
-  //object creator?
-  //   var key = event.target.id
-  // var val = event.target.value
-  // var obj  = {}
-  // obj[key] = val
-  // this.setState(obj)
-
+  // Notes
   removeNote(id) {
      var filteredNotes = this.state.notes.filter((note) => { return note.id != id; }); 
      this.setState({ notes: filteredNotes });
   },
 
-  receiveNote(newNote, type) {
+  receiveNote(newNote) {
     var allNotes = this.state.notes.concat(newNote)
     this.setState({notes: allNotes })
   },
@@ -71,10 +83,19 @@ var Main = React.createClass({
     this.setState({[type]: notes });
   },
 
+  // Permissions
+
+  receivePermission(newPerm) {
+    var allPerms = this.state.permissions.concat(newPerm);
+    this.setState({permissions: allPerms})
+  },
+
   render() { 
     return ( 
       <div> 
-        <h1 className="col-lg-12 bg-primary">Notes Application</h1>
+        <h1 className="col-lg-12 bg-primary display-2">Notes Application</h1>
+        
+        <h2>Add A Note</h2>
         <NewNote receiveNote={this.receiveNote} />
 
         <h2>My Notes</h2>
@@ -85,6 +106,9 @@ var Main = React.createClass({
         
         <h2>Writable Shared Notes</h2>
         <AllNotes type="writableNotes" notes={this.state.writableNotes} noteDeleted={this.noteDeleted} noteEdited={this.noteEdited} />
+
+        <h2>Note Permissions</h2>
+        <Permissions receivePermission={this.receivePermission} permissions={this.state.permissions} />
       </div> 
   )} 
 });

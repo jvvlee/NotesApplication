@@ -26,3 +26,5 @@ test_user3 = User.create!({
 	password: "password3"
 })
 
+test_user.notes.first.share_with_user(test_user3,1)
+test_user.notes.last.share_with_user(test_user3,2)

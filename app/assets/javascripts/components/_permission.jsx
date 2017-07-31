@@ -1,14 +1,24 @@
-// var Permission = React.createClass({ 
-//   getInitialState() {
-//     return {editable: false}
-//   },
+var Permission = React.createClass({ 
+  getInitialState() {
+    return {editable: false}
+  },
 
-//   render() { 
-      
-//     return ( 
-//     	<div></div>
-//     ) 
-//   },
+  showPerm() {
+  	if (this.props.permission.level == 1) {
+  		return "Read"
+  	} else {
+  		return "Write"
+  	}
+  },
 
+  render() { 
+    return ( 
+    	<div>
+    		<div>{this.props.permission.username}</div>
+    		<div>{this.showPerm()}</div>
+    		<div><span>Note ID: </span>{this.props.permission.note_id}</div>
+    	</div>
+    ) 
+  }
 
-// });
+});

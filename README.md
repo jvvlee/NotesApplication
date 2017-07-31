@@ -37,3 +37,13 @@ start that gives us an idea of how you would approach the task is enough.
 question, but the code must be functional and given to us in a state where we can easily run and interpret it (documentation 
 helps!). Also, remember that scalability is an important consideration for any backend service, so make sure your code is 
 written with that in mind.
+
+# Documenttion
+
+## Features
+- Built with Rails 5 in Ruby 2.4.0
+- Note CRUD interface made with React
+
+## Instructions
+
+## To-dos

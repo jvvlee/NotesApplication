@@ -1,4 +1,10 @@
 class Api::NotesUsersController < Api::BaseController
+  def index
+    @permissions = current_user.given_permissions
+
+    respond_with :api, @permissions
+  end
+
   def create
     @permission = NotesUsers.new(notes_users_params)
 
@@ -7,7 +13,7 @@ class Api::NotesUsersController < Api::BaseController
 
   def update
     @permission = NotesUsers.find(params[:id]).update_attributes(notes_users_params)
-    respond_with :api @permission
+    respond_with :api, @permission
   end
 
   def destroy
