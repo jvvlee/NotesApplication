@@ -18,7 +18,8 @@ end
 
 #Permissions
 
-
+test_user2.notes.first.share_with_user(test_user, 1)
+test_user2.notes.last.share_with_user(test_user, 2)
 
 test_user3 = User.create!({
 	username: "username3",

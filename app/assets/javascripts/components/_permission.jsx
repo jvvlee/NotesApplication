@@ -1,13 +1,14 @@
-var Permission = React.createClass({ 
-  getInitialState() {
-    return {editable: false}
-  },
+// var Permission = React.createClass({ 
+//   getInitialState() {
+//     return {editable: false}
+//   },
 
-  render() { 
+//   render() { 
       
-    return ( 
-    ) 
-  },
+//     return ( 
+//     	<div></div>
+//     ) 
+//   },
 
 
-});
+// });

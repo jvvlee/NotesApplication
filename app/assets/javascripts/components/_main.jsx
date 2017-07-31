@@ -74,10 +74,16 @@ var Main = React.createClass({
   render() { 
     return ( 
       <div> 
-        <h1 className="col-lg-12 bg-primary">Hello, World!</h1>
+        <h1 className="col-lg-12 bg-primary">Notes Application</h1>
         <NewNote receiveNote={this.receiveNote} />
+
+        <h2>My Notes</h2>
         <AllNotes type="notes" notes={this.state.notes} noteDeleted={this.noteDeleted} noteEdited={this.noteEdited} />
+        
+        <h2>Shared Notes</h2>
         <AllNotes type="readableNotes" notes={this.state.readableNotes} noteDeleted={this.noteDeleted} noteEdited={this.noteEdited} />
+        
+        <h2>Writable Shared Notes</h2>
         <AllNotes type="writableNotes" notes={this.state.writableNotes} noteDeleted={this.noteDeleted} noteEdited={this.noteEdited} />
       </div> 
   )} 
