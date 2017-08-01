@@ -6,20 +6,25 @@ class Api::NotesUsersController < Api::BaseController
   end
 
   def create
-    @permission = NotesUsers.new(notes_users_params)
+    user = User.find_by_username(params[:email])
+
+    @permission = NotesUsers.new({user_id: user.id}.merge(notes_users_params))
 
     respond_with :api, @permission
   end
 
   def update
-    @permission = NotesUsers.find(params[:id]).update_attributes(notes_users_params)
-    respond_with :api, @permission
+    @permission = NotesUsers.find(params[:id])
+
+    if can_change?(@permission) && update_attributes(notes_users_params)
+      respond_with :api, @permission
+    end
   end
 
   def destroy
     @permission = NotesUsers.find(params[:id])
 
-    if @permission.destroy!
+    if can_change?(@permission) && @permission.destroy!
       respond_with :api, @permission
     end
   end
@@ -27,8 +32,6 @@ class Api::NotesUsersController < Api::BaseController
   protected
 
   def notes_users_params
-    params.require(:permission).permit(:email, :level, :note_id)
+    params.require(:permission).permit(:level, :note_id)
   end
-
-  def 
 end

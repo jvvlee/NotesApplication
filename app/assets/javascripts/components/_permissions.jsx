@@ -2,17 +2,12 @@ var Permissions = React.createClass({
   render() {    
   	var perms = this.props.permissions.map((permission) => {
       return (
-        <div key={permission.id}>
-          <div className="list-group-item">
-        	 <Permission permission={permission} />
-          </div>
-        </div>
+        <Permission permission={permission} key={permission.id}/>
       )
     })
       
     return (
       <div>
-        <NewPermission />
     	  <div className="list-group">
     		  {perms}	
         </div>

@@ -53,12 +53,27 @@ var Main = React.createClass({
 
   // Permissions
 
-  permissionEdited() {
-
+  permissionEdited(perm) {
+    $.ajax({ 
+      url: `/api/notes/${note.id}`, 
+      type: 'PUT', 
+      data: { note: note }, 
+      success: () => {
+        this.updatePermission(perm)
+      }
+    })
   },
 
-  permissionDeleted() {
+  permissionDeleted(perm) {
+    _this = this
 
+    $.ajax({ 
+      url: `/api/permissions/${id}`, 
+      type: 'DELETE', 
+      success() { 
+        _this.removePermission(id)
+      } 
+    });
   },
 
   // View logic
@@ -90,6 +105,20 @@ var Main = React.createClass({
     this.setState({permissions: allPerms})
   },
 
+  removePermission(id) {
+    var filteredPermissions = this.state.permissions.filter((perm) => { return perm.id != id; }); 
+    this.setState({ permissions: filteredPermissions });
+  },
+
+  updatePermission(perm) {
+    var perms = this.state.permissions.filter(p) => {
+      return p.id != perm.id
+    });
+
+    perms.push(perm)
+    this.setState({permissions: perms})
+  },
+
   render() { 
     return ( 
       <div> 
@@ -108,6 +137,7 @@ var Main = React.createClass({
         <AllNotes type="writableNotes" notes={this.state.writableNotes} noteDeleted={this.noteDeleted} noteEdited={this.noteEdited} />
 
         <h2>Note Permissions</h2>
+        <NewPermission notes={this.state.notes}/>
         <Permissions receivePermission={this.receivePermission} permissions={this.state.permissions} />
       </div> 
   )} 

@@ -12,5 +12,10 @@ class Api::BaseController < ApplicationController
 		end
 	end 
 
+	protected
+
+	def can_change?(obj)
+    obj.user_id == current_user.id
+  end
 
 end

@@ -20,11 +20,23 @@ var NewPermission = React.createClass({
     });
   },
 
+  createSelectItems() {
+    var options = this.props.notes.map((note) => {
+      return (
+        <option key={note.id} value={note.id}>{note.title}</option>
+      )
+    })
+
+    return options
+  },
+
   render() { 
     return ( 
       <div> 
         <input ref="username" placeholder='Enter the email of the user'></input> 
-        <input ref="noteID" placeholder='Enter the id of the note.'></input>
+        <select ref="noteID">
+          {this.createSelectItems()}
+        </select>
         <input type="number" ref="level" placeholder='Enter the id of the note.'></input> 
         <button onClick={this.submitPerm}>Submit</button> 
       </div> 

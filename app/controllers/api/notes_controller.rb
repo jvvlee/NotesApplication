@@ -30,7 +30,4 @@ class Api::NotesController < Api::BaseController
     params.require(:note).permit(:content, :title)
   end
 
-  def can_change?(note)
-    current_user.notes.find(note.id)
-  end
 end

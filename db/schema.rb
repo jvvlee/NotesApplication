@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170729220034) do
+ActiveRecord::Schema.define(version: 20170801031603) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 20170729220034) do
     t.index ["user_id"], name: "index_notes_on_user_id"
   end
 
-  create_table "notes_users", id: false, force: :cascade do |t|
+  create_table "notes_users", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "note_id", null: false
     t.integer "level"
