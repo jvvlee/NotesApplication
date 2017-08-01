@@ -9,10 +9,12 @@ var Permissions = React.createClass({
     })
       
     return (
-      <NewPermission  />
-    	<div className="list-group">
-    		{perms}	
-    	</div>
+      <div>
+        <NewPermission  />
+      	<div className="list-group">
+      		{perms}	
+      	</div>
+      </div>
     ) 
   }
 });

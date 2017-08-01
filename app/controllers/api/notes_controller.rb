@@ -9,19 +9,28 @@ class Api::NotesController < Api::BaseController
   end
 
   def update
-    @note = Note.find(params[:id]).update_attributes(note_params)
-    respond_with :api, @note
+    @note = Note.find(params[:id])
+    
+    if can_change?(@note) && @note.update_attributes(note_params)
+      respond_with :api, @note
+    end
   end
 
   def destroy
     @note = Note.find(params[:id])
 
-    if @note.destroy!
+    if can_change?(@note) && @note.destroy!
       respond_with :api, @note
     end
   end
 
+  protected
+
   def note_params
     params.require(:note).permit(:content, :title)
+  end
+
+  def can_change?(note)
+    current_user.notes.find(note.id)
   end
 end
