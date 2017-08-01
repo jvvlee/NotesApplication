@@ -24,7 +24,11 @@ class Api::NotesUsersController < Api::BaseController
     end
   end
 
+  protected
+
   def notes_users_params
-    params.require(:permission).permit(:email, :level)
+    params.require(:permission).permit(:email, :level, :note_id)
   end
+
+  def 
 end

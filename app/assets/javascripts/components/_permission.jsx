@@ -13,7 +13,7 @@ var Permission = React.createClass({
 
   render() { 
     return ( 
-    	<div>
+    	<div key={this.props.permission.id}>
     		<div>{this.props.permission.username}</div>
     		<div>{this.showPerm()}</div>
     		<div><span>Note ID: </span>{this.props.permission.note_id}</div>
