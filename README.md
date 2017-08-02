@@ -15,7 +15,7 @@ In writing this application, I decided to create the react views before the perm
 ## Instructions
 - Install Ruby 2.4.0 with RVM
 - Bundle install gems
-- Run rake db:setup to migrate the database and seed it with test users.
+- Run rake db:setup to migrate the database and seed it with test users. NOTE: This assumes that you have a db-user named "root" with no password and db-write permissions. Change this in config/database.yml to fit your own configuration.
 - Go to localhost:3000 (or whichever your development port is) and login with username "username" and password "password"
 
 ## To-dos

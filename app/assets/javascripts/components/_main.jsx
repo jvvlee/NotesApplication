@@ -55,11 +55,12 @@ var Main = React.createClass({
 
   permissionEdited(perm) {
     $.ajax({ 
-      url: `/api/notes/${note.id}`, 
+      url: `/api/permissions/${perm.id}`, 
       type: 'PUT', 
-      data: { note: note }, 
-      success: () => {
-        this.updatePermission(perm)
+      data: { perm: perm }, 
+      success: (resp) => {
+        debugger
+        this.updatePermission(resp)
       }
     })
   },
@@ -111,7 +112,7 @@ var Main = React.createClass({
   },
 
   updatePermission(perm) {
-    var perms = this.state.permissions.filter(p) => {
+    var perms = this.state.permissions.filter((p) => {
       return p.id != perm.id
     });
 
@@ -138,7 +139,7 @@ var Main = React.createClass({
 
         <h2>Note Permissions</h2>
         <NewPermission notes={this.state.notes}/>
-        <Permissions receivePermission={this.receivePermission} permissions={this.state.permissions} />
+        <Permissions receivePermission={this.receivePermission} permissionEdited={this.permissionEdited} permissionDeleted={this.permissionDeleted} permissions={this.state.permissions} />
       </div> 
   )} 
 });

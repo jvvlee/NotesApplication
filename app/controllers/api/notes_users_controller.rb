@@ -16,7 +16,7 @@ class Api::NotesUsersController < Api::BaseController
   def update
     @permission = NotesUsers.find(params[:id])
 
-    if can_change?(@permission) && update_attributes(notes_users_params)
+    if can_change?(@permission) && @permission.update_attributes(notes_users_params)
       respond_with :api, @permission
     end
   end
