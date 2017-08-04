@@ -57,7 +57,7 @@ var Main = React.createClass({
     $.ajax({ 
       url: `/api/permissions/${perm.id}`, 
       type: 'PUT', 
-      data: { perm: perm }, 
+      data: { permission: perm }, 
       success: (resp) => {
         debugger
         this.updatePermission(resp)
