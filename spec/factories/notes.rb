@@ -1,5 +1,7 @@
 FactoryGirl.define do
   factory :note do
-    content "This belongs to user #{user_id}"
+  	association :owner, factory: :user
+  	title "Title"
+    content "Content"
   end
 end
