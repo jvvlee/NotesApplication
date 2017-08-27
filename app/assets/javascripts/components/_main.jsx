@@ -10,6 +10,8 @@ var Main = React.createClass({
 
   // Model manipulation
 
+  // TODO: Condense these methods into dynamic attr matchers as seen in update note method
+
   // Notes
   componentDidMount() { 
     $.getJSON('/api/notes.json', (response) => {
@@ -138,7 +140,7 @@ var Main = React.createClass({
         <AllNotes type="writableNotes" notes={this.state.writableNotes} noteDeleted={this.noteDeleted} noteEdited={this.noteEdited} />
 
         <h2>Note Permissions</h2>
-        <NewPermission notes={this.state.notes}/>
+        <NewPermission notes={this.state.notes} receivePermission={this.receivePermission}/>
         <Permissions receivePermission={this.receivePermission} permissionEdited={this.permissionEdited} permissionDeleted={this.permissionDeleted} permissions={this.state.permissions} />
       </div> 
   )} 

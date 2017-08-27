@@ -1,6 +1,9 @@
-= form_for @user do |f|
-  = f.label :username
-  = f.text_field :username
-  = f.label :password
-  = f.password_field :password
-  = f.submit
+= form_for @user, :html => {class: "login centered_form"} do |f|
+  .form_group
+    = f.label :username
+    = f.text_field :username
+  .form_group
+    = f.label :password
+    = f.password_field :password
+  .form_group
+    = f.submit

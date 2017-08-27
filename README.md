@@ -19,11 +19,10 @@ In writing this application, I decided to create the react views before the perm
 - Go to localhost:3000 (or whichever your development port is) and login with username "username" and password "password"
 
 ## To-dos
-- Need to implement creatable permissions
-- Nest Permissions under each note
-- Test cases
-- Use bootstrap more efficiently
+- Nest Permissions under each note instead of listing them separately
+- More Test cases - Particularly integration tests
+- Determine to what extent I want to use bootstrap
+- More intuitive UI for forms.
 
 ## Bugs
 - Need to get rid of annoying warnings about LESS assets
-- Permission array in react throws 'missing key' warning despite key prop being supplied.

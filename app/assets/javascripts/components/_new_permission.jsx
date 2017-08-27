@@ -1,6 +1,9 @@
 var NewPermission = React.createClass({
   getInitialState() {
-    return {permission: 1}
+    return {
+      permission: 1,
+      permissionMessage: ""
+    }
   },
 
   submitPerm() {
@@ -11,14 +14,23 @@ var NewPermission = React.createClass({
       url: '/api/permissions', 
       type: 'POST',
       beforeSend: $.rails.CSRFProtection,
-      data: { 
-        note: { 
-          user_id: noteID
+      data: {
+        permission: {
+          level: this.state.permission,
+          note_id: noteID
         },
         email: username
       },
-      success: (response) => {
+      success: (xhr,status,response) => {
         this.props.receivePermission(response);
+        this.setState({
+          permissionMessage: "Your permission was successfully created."
+        })
+      },
+      error: (response) => {
+        this.setState({
+          permissionMessage: "There was an error. Check that the email address is correct."
+        })
       }
     });
   },
@@ -39,19 +51,32 @@ var NewPermission = React.createClass({
 
   render() { 
     return ( 
-      <div> 
-        <label name="username">Enter the username of the user to share a note with.</label>
-        <input name="username" ref="username" placeholder='username'></input>
-        <label name="username" name="note">Select a note to share.</label>
-        <select ref="noteID" name='note'>
-          {this.createSelectItems()}
-        </select>
-        <label name="level" name="note">Select type of access.</label>
+      <div>
+        <div class="form_group">
+          <label name="username">Enter the username of the user to share a note with.</label>
+          <input name="username" ref="username" placeholder='username'></input>
+        </div>
+
+        <div class="form_group">
+          <label name="username" name="note">Select a note to share.</label>
+          <select ref="noteID" name='note'>
+            {this.createSelectItems()}
+          </select>
+        </div>
+          
         <div onChange={this.setPermissions}>
+          <label name="level" name="note">Select type of access.</label>
           <input type="radio" value="1" name="level"/> Read
           <input type="radio" value="2" name="level"/> Write
         </div>
-        <button onClick={this.submitPerm}>Submit</button> 
+
+        <div class="form_group">
+          <button onClick={this.submitPerm}>Submit</button>
+        </div>
+
+        <div class="permission-message">
+          {this.state.permissionMessage}
+        </div>
       </div> 
     ) 
   } 

@@ -1,4 +1,6 @@
 class Api::NotesUsersController < Api::BaseController
+  rescue_from ActiveRecord::RecordNotFound, with: :not_found
+
   def index
     @permissions = current_user.given_permissions
 
@@ -6,11 +8,10 @@ class Api::NotesUsersController < Api::BaseController
   end
 
   def create
-    user = User.find_by_username(params[:email])
+    user = User.find_by_username!(params[:email])
 
     @permission = NotesUsers.new({user_id: user.id}.merge(notes_users_params))
-
-    if @permission.create
+    if @permission.save
       render json: @permission
     else
       render :json => { :errors => "true" }, :status => 422
@@ -41,6 +42,10 @@ class Api::NotesUsersController < Api::BaseController
     render json: @permission
   end
 
+  def not_found
+    render :json => { :errors => "true" }, :status => 422
+  end
+
   protected
 
   def notes_users_params
@@ -50,4 +55,5 @@ class Api::NotesUsersController < Api::BaseController
   def can_change_permission?(permission)
     !!current_user.given_permissions.find(permission.id)
   end
+
 end

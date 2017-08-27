@@ -33,7 +33,7 @@ var Note = React.createClass({
         return (
           <div>
             <button onClick={this.editNote}>{this.state.editable ? 'Submit' : 'Edit' }</button>
-            <button onClick={this.props.noteDeleted.bind(null, this.props.note.id)}>DELETE</button>     
+            <button onClick={this.props.noteDeleted.bind(null, this.props.note.id)}>Delete</button>     
           </div>
         )
     } 
