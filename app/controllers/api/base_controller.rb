@@ -15,7 +15,13 @@ class Api::BaseController < ApplicationController
 	protected
 
 	def can_change?(obj)
-    obj.user_id == current_user.id
+    allowed_users = obj.writable_users
+
+    if allowed_users.include?(current_user) || obj.owner == current_user
+    	return true
+    else
+    	return false
+    end
   end
 
 end

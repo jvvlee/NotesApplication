@@ -10,6 +10,8 @@ class Api::NotesController < Api::BaseController
 
   def update
     @note = Note.find(params[:id])
+
+    byebug
     
     if can_change?(@note) && @note.update_attributes(note_params)
       respond_with :api, @note
